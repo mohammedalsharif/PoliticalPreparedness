@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Political Preparedness</string>
+    <string name="upcoming_elections">Upcoming Elections</string>
+    <string name="saved_elections">Saved Elections</string>
+    <string name="my_representatives">My Representatives</string>
+    <string name="use_my_location">Use my location</string>
+    <string name="find_my_representatives">find my representatives</string>
+    <string name="representation_search">Representation search</string>
+    <string name="address_line_1">Address line 1</string>
+    <string name="address_line_2">Address line 2</string>
+    <string name="city">City</string>
+    <string name="zip">Zip</string>
+    <string name="no_data">no data</string>
+    <string name="election_information">Election Information</string>
+    <string name="voter_info">Voter Info</string>
+    <string name="follow">Follow</string>
+    <string name="voting_locations">Voting Locations:</string>
+    <string name="ballot_information">Ballot Information</string>
+    <string name="location_permission_is_required_to_fetch_the_current_address">Location permission is required to fetch the current address.</string>
+    <string name="location_services_must_be_enabled_to_use_this_feature">Location services must be enabled to use this feature.</string>
+    <string name="ok">ok\n</string>
+    <string name="location_required">Location Required</string>
+    <string name="please_enable_location_service">Please enable location service</string>
+    <string name="allow">Allow</string>
+    <string name="please_allow_location_permission">Please allow location permission</string>
 
-    <!-- TODO: Add necessary string values -->
 
 </resources>

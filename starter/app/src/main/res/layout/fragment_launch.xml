@@ -8,11 +8,45 @@
         android:layout_height="match_parent"
         tools:context="com.example.android.politicalpreparedness.MainActivity">
 
-        <!-- TODO: Add image for home screen logo. -->
 
-        <!-- TODO: Add Button to navigate to upcoming elections. -->
+        <Button
+            android:id="@+id/upcomingButton"
+            style="@style/BaseButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="@dimen/large_padding"
+            android:layout_marginEnd="@dimen/large_padding"
+            android:layout_marginBottom="@dimen/default_padding"
+            android:text="@string/upcoming_elections"
+            app:layout_constraintBottom_toTopOf="@+id/representativeButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <!-- TODO: Add Button to navigate to representatives. -->
+        <Button
+            android:id="@+id/representativeButton"
+            style="@style/BaseButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="@dimen/large_padding"
+            android:layout_marginEnd="@dimen/large_padding"
+            android:layout_marginBottom="@dimen/default_padding"
+            android:text="@string/find_my_representatives"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/xlarge_padding"
+            android:layout_marginTop="@dimen/xlarge_padding"
+            android:layout_marginEnd="@dimen/xlarge_padding"
+            android:layout_marginBottom="@dimen/xlarge_padding"
+            app:layout_constraintBottom_toTopOf="@+id/upcomingButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ballot_logo" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

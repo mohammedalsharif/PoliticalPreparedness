@@ -1,35 +1,50 @@
 package com.example.android.politicalpreparedness.election
 
-import android.os.Bundle
+import android.content.Intent
+import android.net.Uri
+
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
+import com.example.android.politicalpreparedness.base.BaseFragment
+import com.example.android.politicalpreparedness.databinding.FragmentVoterInfoBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class VoterInfoFragment : Fragment() {
+@AndroidEntryPoint
+class VoterInfoFragment : BaseFragment<FragmentVoterInfoBinding, VoterInfoViewModel>() {
+    override val viewModel: VoterInfoViewModel by viewModels()
+    private val args: VoterInfoFragmentArgs by navArgs()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?)
-    : View? {
 
-        // TODO: Add ViewModel values and create ViewModel
-
-        // TODO: Add binding values
-
-        // TODO: Populate voter info -- hide views without provided data.
-
-        /**
-        Hint: You will need to ensure proper data is provided from previous fragment.
-        */
-
-        // TODO: Handle loading of URLs
-
-        // TODO: Handle save button UI state
-        // TODO: cont'd Handle save button clicks
-        return null
+    override fun initViews() {
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+        viewModel.setElectionId(args.argElectionId)
+        viewModel.election=args.election
+        viewModel.setLocation("${args.election.division.country},${args.election.division.state}")
+        viewModel.getVoterInfoResponse("${args.election.division.country},${args.election.division.state}", args.argElectionId)
+        viewModel.checkIfElectionInLocal(args.argElectionId)
+        viewModel.savedElection.observe(viewLifecycleOwner) { election ->
+            if (election == args.election) {
+                binding.followButton.text = "UnFollow Election"
+                viewModel.electionIsInLocal = true
+            } else {
+                binding.followButton.text = "Follow Election"
+                viewModel.electionIsInLocal = false
+            }
+        }
+        viewModel.openUrl.observe(viewLifecycleOwner) { url ->
+            openUrlUsingIntent(url)
+        }
     }
 
-    // TODO: Create method to load URL intents
+    override fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
+        FragmentVoterInfoBinding.inflate(inflater)
+
+    private fun openUrlUsingIntent(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
+    }
 }

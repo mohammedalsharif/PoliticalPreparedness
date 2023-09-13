@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="electionItem"
+            type="com.example.android.politicalpreparedness.network.models.Election" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/tvName"
+            style="@style/TextviewBaseStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{electionItem.name}" />
+
+        <TextView
+            android:id="@+id/tvElectionDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextviewBaseStyle" />
+    </LinearLayout>
+
+</layout>

@@ -17,6 +17,7 @@ buildscript {
         version_play_services_location = "17.0.0"
         version_room = "2.5.1"
         version_timber = "5.0.1"
+        version_hilt = "2.44"
     }
 
     repositories {
@@ -29,6 +30,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$version_kotlin"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$version_kotlin"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$version_navigation"
+        classpath("com.google.dagger:hilt-android-gradle-plugin:$version_hilt")
     }
 }
 

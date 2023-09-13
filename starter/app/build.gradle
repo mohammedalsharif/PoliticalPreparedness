@@ -5,6 +5,7 @@ plugins {
     id 'androidx.navigation.safeargs'
     id 'kotlinx-serialization'
     id 'kotlin-parcelize'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -44,6 +45,13 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_kotlin_coroutines"
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$version_kotlin_serialization"
 
+    // Hilt
+    implementation("com.google.dagger:hilt-android:2.46.1")
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    kapt("com.google.dagger:hilt-android-compiler:2.46.1")
+    kapt("androidx.hilt:hilt-compiler:1.0.0")
+    implementation("androidx.hilt:hilt-common:1.0.0")
+
     // Constraint Layout
     implementation "androidx.constraintlayout:constraintlayout:$version_constraint_layout"
 
@@ -68,11 +76,12 @@ dependencies {
     implementation "com.squareup.moshi:moshi-adapters:$version_moshi"
 
     // Glide
-    // TODO: Add Glide Implementation
+    implementation "com.github.bumptech.glide:glide:$version_glide"
 
     // Room
     implementation "androidx.room:room-runtime:$version_room"
     kapt "androidx.room:room-compiler:$version_room"
+    implementation "androidx.room:room-ktx:$version_room"
 
     // Location
     implementation "com.google.android.gms:play-services-location:$version_play_services_location"
