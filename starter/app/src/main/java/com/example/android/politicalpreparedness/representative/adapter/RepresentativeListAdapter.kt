@@ -35,8 +35,6 @@ class RepresentativeListAdapter: ListAdapter<Representative, RepresentativeListA
             binding.representativePhoto.setImageResource(R.drawable.ic_profile)
             if(!(item.official.channels.isNullOrEmpty())) showSocialLinks(item.official.channels)
             if(!(item.official.urls.isNullOrEmpty())) showWWWLinks(item.official.urls)
-
-
             binding.executePendingBindings()
         }
 

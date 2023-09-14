@@ -3,6 +3,7 @@ package com.example.android.politicalpreparedness.representative
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android.politicalpreparedness.network.models.Address
@@ -15,12 +16,16 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class RepresentativeViewModel @Inject constructor(private val representativeRepository: RepresentativeRepository) : ViewModel() {
+class RepresentativeViewModel @Inject constructor(
+    val savedStateHandle: SavedStateHandle,
+    private val representativeRepository: RepresentativeRepository,
+) : ViewModel() {
     val addressLine1 = MutableLiveData<String>()
     val addressLine2 = MutableLiveData<String>()
     val city = MutableLiveData<String>()
     val state = MutableLiveData<String>()
     val zip = MutableLiveData<String>()
+
 
     private var _representativesResponse = MutableLiveData<RepresentativeResponse>()
     val representativeResponse: LiveData<RepresentativeResponse> get() = _representativesResponse
@@ -44,6 +49,8 @@ class RepresentativeViewModel @Inject constructor(private val representativeRepo
                 val officials = _representativesResponse.value!!.officials
                 _representatives.value =
                     offices.flatMap { office -> office.getRepresentatives(officials) }
+                savedStateHandle[DATA_LIST_KEY] =
+                    offices.flatMap { office -> office.getRepresentatives(officials) }
             } else {
                 _representatives.value = emptyList()
                 Timber.e("getRepresentative:" + response.errorBody()?.string() + " ")
@@ -51,6 +58,10 @@ class RepresentativeViewModel @Inject constructor(private val representativeRepo
 
 
         }
+    }
+
+    fun getRepresentativeFromState(): LiveData<List<Representative>> {
+        return savedStateHandle.getLiveData(DATA_LIST_KEY)
     }
 
     fun setStateSelected(newState: String) {
@@ -73,5 +84,8 @@ class RepresentativeViewModel @Inject constructor(private val representativeRepo
         zip.value.toString()
     )
 
+    companion object {
+        const val DATA_LIST_KEY = "representatives"
+    }
 
 }

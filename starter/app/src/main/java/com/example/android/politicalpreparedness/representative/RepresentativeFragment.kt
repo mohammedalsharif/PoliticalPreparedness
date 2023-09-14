@@ -12,6 +12,7 @@ import android.provider.Settings
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.viewModels
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.base.BaseFragment
@@ -58,14 +59,16 @@ class DetailFragment : BaseFragment<FragmentRepresentativeBinding, Representativ
             viewModel.getRepresentative()
         }
         setupRecRrepresentative()
+        binding.executePendingBindings()
 
     }
 
     private fun setupRecRrepresentative() {
         val representativeAdapter = RepresentativeListAdapter()
         binding.recRepresentatives.adapter = representativeAdapter
-        viewModel.representatives.observe(viewLifecycleOwner) { representatives ->
+        viewModel.getRepresentativeFromState().observe(viewLifecycleOwner) { representatives ->
             representativeAdapter.submitList(representatives)
+            binding.executePendingBindings()
         }
     }
 
@@ -124,7 +127,21 @@ class DetailFragment : BaseFragment<FragmentRepresentativeBinding, Representativ
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        val currentState = binding.motionLayout.currentState
+        outState.putInt("motionLayoutState", currentState)
+    }
 
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        val savedState = savedInstanceState?.getInt("motionLayoutState", -1)
+        if (savedState != -1) {
+            if (savedState != null) {
+                binding.motionLayout.transitionToState(savedState)
+            }
+        }
+    }
     private fun geoCodeLocation(location: Location): Address {
         val geocoder = Geocoder(requireContext(), Locale.getDefault())
         return geocoder.getFromLocation(location.latitude, location.longitude, 1)?.map { address ->
@@ -193,4 +210,6 @@ class DetailFragment : BaseFragment<FragmentRepresentativeBinding, Representativ
         }
 
     }
+
+
 }

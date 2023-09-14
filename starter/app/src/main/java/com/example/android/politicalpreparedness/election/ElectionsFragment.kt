@@ -20,6 +20,7 @@ class ElectionsFragment : BaseFragment<FragmentElectionBinding, ElectionsViewMod
     override fun initViews() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        binding.executePendingBindings()
         setUpRecUpComingElections()
         setUpRecSavedElections()
     }

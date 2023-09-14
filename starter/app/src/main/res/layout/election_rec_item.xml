@@ -9,7 +9,7 @@
             type="com.example.android.politicalpreparedness.network.models.Election" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -20,13 +20,21 @@
             style="@style/TextviewBaseStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{electionItem.name}" />
+            android:text="@{electionItem.name}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvElectionDay"
+            style="@style/TextviewBaseStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/TextviewBaseStyle" />
-    </LinearLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
